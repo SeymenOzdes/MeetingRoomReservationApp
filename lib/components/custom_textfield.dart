@@ -19,16 +19,17 @@ class CustomTextfield extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("$title",
+            Text(title,
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
             TextField(
-                controller: controller,
-                obscureText: obsecureText,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                )),
+              controller: controller,
+              obscureText: obsecureText,
+              decoration: InputDecoration(
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+            ),
           ],
         ));
   }

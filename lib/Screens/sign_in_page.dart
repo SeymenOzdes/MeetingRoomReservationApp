@@ -14,6 +14,30 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController mailFieldController = TextEditingController();
   final TextEditingController passwordFieldController = TextEditingController();
 
+  void _formValidation() {
+    if (nameFieldController.text.isEmpty ||
+        mailFieldController.text.isEmpty ||
+        passwordFieldController.text.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Hata"),
+          content: const Text("Lütfen boş alanları doldurun"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Tamam"),
+            ),
+          ],
+        ),
+      );
+    } else {
+      Navigator.pushNamed(context, '/logInRoute');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,23 +58,25 @@ class _SignInPageState extends State<SignInPage> {
               title: "isim",
             ),
             CustomTextfield(
-                controller: mailFieldController,
-                obsecureText: false,
-                title: "Mail"),
+              controller: mailFieldController,
+              obsecureText: false,
+              title: "Mail",
+            ),
             CustomTextfield(
-                controller: passwordFieldController,
-                obsecureText: true,
-                title: "Şifre"),
+              controller: passwordFieldController,
+              obsecureText: true,
+              title: "Şifre",
+            ),
             const SizedBox(height: 140),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/logInRoute');
-                },
-                child: const Text("Kayıt Ol"),
-                style: const ButtonStyle(
-                    minimumSize: WidgetStatePropertyAll(Size(150, 50)),
-                    backgroundColor: WidgetStatePropertyAll(Colors.blue),
-                    foregroundColor: WidgetStatePropertyAll(Colors.white)))
+              onPressed: _formValidation,
+              child: const Text("Kayıt Ol"),
+              style: const ButtonStyle(
+                minimumSize: WidgetStatePropertyAll(Size(150, 50)),
+                backgroundColor: WidgetStatePropertyAll(Colors.blue),
+                foregroundColor: WidgetStatePropertyAll(Colors.white),
+              ),
+            ),
           ],
         ),
       ),
@@ -61,6 +87,7 @@ class _SignInPageState extends State<SignInPage> {
   void dispose() {
     nameFieldController.dispose();
     mailFieldController.dispose();
+    passwordFieldController.dispose();
     super.dispose();
   }
 }
