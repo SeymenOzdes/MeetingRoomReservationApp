@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meeting_booking_app/Screens/log_in_page.dart';
 import 'package:meeting_booking_app/cubit/auth_cubit.dart';
 import 'package:meeting_booking_app/cubit/auth_state.dart';
 import '../components/custom_textfield.dart';
@@ -18,30 +17,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController mailFieldController = TextEditingController();
   final TextEditingController passwordFieldController = TextEditingController();
 
-  /* void _formValidation() {
-    if (nameFieldController.text.isEmpty ||
-        mailFieldController.text.isEmpty ||
-        passwordFieldController.text.isEmpty) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("Hata"),
-          content: const Text("Lütfen boş alanları doldurun"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("Tamam"),
-            ),
-          ],
-        ),
-      );
-    } else {
-      Navigator.pushNamed(context, '/logInRoute');
-    }
-  */
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,22 +24,9 @@ class _SignUpPageState extends State<SignUpPage> {
       body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthError) {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: const Text("Hata"),
-                content: const Text("Lütfen boş alanları doldurunuz"),
-                actions: [
-                  TextButton(
-                      onPressed: () => {Navigator.of(context).pop()},
-                      child: const Center(child: Text("tamam")))
-                ],
-              ),
-            );
+            context.read<AuthCubit>().showErrorAlert(context);
           } else if (state is AuthValid) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const LogInPage()));
-            // Navigator.pushNamed(context, '/logInRoute');
+            Navigator.pushNamed(context, '/login');
           }
         },
         child: Center(

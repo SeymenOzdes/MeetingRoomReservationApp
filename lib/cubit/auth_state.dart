@@ -1,5 +1,3 @@
-// import 'package:flutter_bloc/flutter_bloc.dart';
-
 abstract class AuthState {
   const AuthState();
 }
@@ -21,7 +19,5 @@ class AuthValid extends AuthState {
 }
 
 class AuthError extends AuthState {
-  final String errorMessage;
-
-  const AuthError(this.errorMessage);
+  const AuthError();
 }
