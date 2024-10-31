@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meeting_booking_app/cubit/auth_cubit.dart';
 import 'package:meeting_booking_app/cubit/auth_state.dart';
@@ -26,7 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
           if (state is AuthError) {
             context.read<AuthCubit>().showErrorAlert(context);
           } else if (state is AuthValid) {
-            Navigator.pushNamed(context, '/login');
+            Navigator.pushReplacementNamed(context, '/login');
           }
         },
         child: Center(

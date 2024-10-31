@@ -34,6 +34,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meeting_booking_app/Screens/add_meeting_room.dart';
 import 'package:meeting_booking_app/Screens/log_in_page.dart';
 import 'package:meeting_booking_app/cubit/auth_cubit.dart';
+import 'package:meeting_booking_app/cubit/meeting_room_cubit.dart';
 import 'package:meeting_booking_app/home_page.dart';
 import 'Screens/sign_up_page.dart';
 
@@ -49,9 +50,10 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthCubit(),
       child: MaterialApp(
-        initialRoute: "/home",
+        initialRoute: "/signup",
         routes: {
-          "/home": (context) => const HomePage(),
+          "/home": (context) => BlocProvider(
+              create: (context) => MeetingRoomCubit(), child: const HomePage()),
           "/login": (context) => const LogInPage(),
           "/signup": (context) => const SignUpPage(),
           "/addMeetingRoom": (context) => const AddMeetingRoom(),

@@ -26,7 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
               emit(const AuthInitial()),
             },
             child: const Center(
-              child: Text("tamam"),
+              child: Text("Tamam"),
             ),
           )
         ],

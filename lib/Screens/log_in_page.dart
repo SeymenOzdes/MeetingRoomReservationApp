@@ -32,7 +32,8 @@ class _LogInPageState extends State<LogInPage> {
             if (state is AuthError) {
               context.read<AuthCubit>().showErrorAlert(context);
             } else if (state is AuthValid) {
-              Navigator.pushNamed(context, '/home');
+              //TODO: Authvalid olduğu zaman diğer sayfaya geçiş sağlanmıyor. Geçiş için önce authError olması gerekiyor, ondan sonra valid olurs geçiş sağlanıyor.
+              Navigator.pushReplacementNamed(context, '/home');
             }
           },
           child: Center(
@@ -65,7 +66,7 @@ class _LogInPageState extends State<LogInPage> {
                     backgroundColor: WidgetStatePropertyAll(Colors.blue),
                     foregroundColor: WidgetStatePropertyAll(Colors.white),
                   ),
-                  child: const Text("Kayıt Ol"),
+                  child: const Text("Giriş Yap"),
                 ),
               ],
             ),
